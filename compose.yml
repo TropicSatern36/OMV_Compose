@@ -1,0 +1,187 @@
+networks:
+  omv:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/24
+          gateway: 10.5.0.1
+
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    volumes:
+      - ${APPDATA}/adgaurdhome/work:/opt/adguardhome/work
+      - ${APPDATA}/adgaurdhome/conf:/opt/adguardhome/conf
+    ports:
+      - 53:53/udp
+    networks:
+      omv:
+        ipv4_address: 10.5.0.101
+    restart: unless-stopped
+
+  cloudflared:
+    container_name: cloudflared
+    image: cloudflare/cloudflared
+    networks:
+      omv:
+        ipv4_address: 10.5.0.102
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+
+  emby:
+    image: lscr.io/linuxserver/emby:latest
+    container_name: emby
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${APPDATA}/emby:/config
+      - media:/media
+      - users:/home
+    devices:
+      - /dev/dri:/dev/dri #optional
+    network_mode: host
+    restart: unless-stopped
+
+  organizr:
+    image: organizr/organizr
+    container_name: organizr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+    volumes:
+      - ${APPDATA}/organizr:/config
+    networks:
+      omv:
+        ipv4_address: 10.5.0.104
+    restart: unless-stopped
+
+  kavita:
+    image: lscr.io/linuxserver/kavita:latest
+    container_name: kavita
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${APPDATA}/kavita:/config
+      - media:/media
+    networks:
+      omv:
+        ipv4_address: 10.5.0.105
+    restart: unless-stopped
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:develop
+    container_name: prowlarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${APPDATA}/prowlarr:/config
+    networks:
+      omv:
+        ipv4_address: 10.5.0.106
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - WEBUI_PORT=${WEBUI_PORT}
+      - TORRENTING_PORT=${TORRENTING_PORT}
+    volumes:
+      - ${APPDATA}/qbittorrent:/config
+      - downloads:/downloads
+    ports:
+      - ${TORRENTING_PORT}:${TORRENTING_PORT}
+      - ${TORRENTING_PORT}:${TORRENTING_PORT}/udp
+    networks:
+      omv:
+        ipv4_address: 10.5.0.107
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:develop
+    container_name: radarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${APPDATA}/radarr:/config
+      - media:/media
+      - downloads:/downloads
+    networks:
+      omv:
+        ipv4_address: 10.5.0.108
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:develop
+    container_name: sonarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${APPDATA}/sonarr:/config
+      - media:/media
+      - downloads:/downloads
+    networks:
+      omv:
+        ipv4_address: 10.5.0.109
+    restart: unless-stopped
+
+  swag:
+    image: lscr.io/linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - URL=tropicsatern36.com
+      - SUBDOMAINS=wildcard
+      - VALIDATION=dns
+      - DNSPLUGIN=cloudflare
+    volumes:
+      - ${APPDATA}/swag:/config
+    ports:
+      - ${HTTP_PORT}:${HTTP_PORT}
+      - ${HTTPS_PORT}:${HTTPS_PORT}
+    networks:
+      omv:
+        ipv4_address: 10.5.0.110
+    restart: unless-stopped
+
+volumes:
+  downloads:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${DOWNLOADS_PATH}
+
+  media:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${MEDIA_PATH}
+
+  users:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${USERS_PATH}
