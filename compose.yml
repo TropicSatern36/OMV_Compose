@@ -7,9 +7,9 @@ networks:
           gateway: 10.5.0.1
 
 services:
-  adguardhome:
+  adguard:
     image: adguard/adguardhome
-    container_name: adguardhome
+    container_name: adguard
     volumes:
       - ${APPDATA}/adgaurdhome/work:/opt/adguardhome/work
       - ${APPDATA}/adgaurdhome/conf:/opt/adguardhome/conf
