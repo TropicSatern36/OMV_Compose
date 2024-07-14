@@ -47,8 +47,8 @@ services:
       - /opt/vc/lib:/opt/vc/lib #optional
     devices:
       - /dev/dri:/dev/dri #optional
-    #ports:
-    #  - ${EMBY_PORT}:${EMBY_PORT}
+    ports:
+      - ${EMBY_PORT}:${EMBY_PORT}
     #networks:
     #  omv:
     #    ipv4_address: 10.5.0.103
