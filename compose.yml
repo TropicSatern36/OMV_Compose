@@ -8,8 +8,10 @@ networks:
 
 services:
   adguard:
-    image: adguard/adguardhome
+    image: adguard/adguardhome:latest
     container_name: adguard
+    environment:
+      - TZ=${TZ}
     volumes:
       - ${APPDATA}/adgaurdhome/work:/opt/adguardhome/work
       - ${APPDATA}/adgaurdhome/conf:/opt/adguardhome/conf
@@ -22,7 +24,7 @@ services:
 
   cloudflared:
     container_name: cloudflared
-    image: cloudflare/cloudflared
+    image: cloudflare/cloudflared:latest
     networks:
       omv:
         ipv4_address: 10.5.0.102
@@ -42,13 +44,19 @@ services:
       - ${APPDATA}/emby:/config
       - media:/media
       - users:/home
+      - /opt/vc/lib:/opt/vc/lib #optional
     devices:
       - /dev/dri:/dev/dri #optional
+    #ports:
+    #  - ${EMBY_PORT}:${EMBY_PORT}
+    #networks:
+    #  omv:
+    #    ipv4_address: 10.5.0.103
     network_mode: host
     restart: unless-stopped
 
   organizr:
-    image: organizr/organizr
+    image: organizr/organizr:latest
     container_name: organizr
     environment:
       - PUID=${PUID}
@@ -76,7 +84,7 @@ services:
     restart: unless-stopped
 
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:develop
+    image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
       - PUID=${PUID}
@@ -110,7 +118,7 @@ services:
     restart: unless-stopped
 
   radarr:
-    image: lscr.io/linuxserver/radarr:develop
+    image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
       - PUID=${PUID}
@@ -126,7 +134,7 @@ services:
     restart: unless-stopped
 
   sonarr:
-    image: lscr.io/linuxserver/sonarr:develop
+    image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
       - PUID=${PUID}
@@ -142,7 +150,7 @@ services:
     restart: unless-stopped
 
   swag:
-    image: lscr.io/linuxserver/swag
+    image: lscr.io/linuxserver/swag:latest
     container_name: swag
     cap_add:
       - NET_ADMIN
@@ -163,6 +171,16 @@ services:
       omv:
         ipv4_address: 10.5.0.110
     restart: unless-stopped
+    
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - TZ=${TZ}
+    networks:
+      omv:
+        ipv4_address: 10.5.0.111
+    restart: unless-stopped 
 
 volumes:
   downloads:
