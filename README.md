@@ -78,39 +78,41 @@ The configuration uses Docker volumes for persistent storage of media, downloads
 
 ## How to Use
 
-This section provides step-by-step instructions for setting up and running the Docker Compose Media Server and Automation configuration.
+This guide provides step-by-step instructions for setting up and running a Docker Compose-based media server and automation configuration.
 
-### Prerequisites
+## Prerequisites
 
-Before starting, make sure you have the following installed:
+Before proceeding, ensure the following software is installed on your system:
 
-- **Docker**: Docker is required to run the containers.
-- **Docker Compose**: Docker Compose is used to manage multi-container Docker applications.
-- **Git** (optional): To clone the repository.
+- **Docker**: Required to run the containers.
+- **Docker Compose**: Manages multi-container Docker applications.
+- **Git** (optional): For cloning the repository directly.
 
-If you do not have Docker and Docker Compose installed, you can follow the official installation guides:
+If Docker or Docker Compose is not installed, follow the official installation instructions:
 - [Install Docker](https://docs.docker.com/get-docker/)
 - [Install Docker Compose](https://docs.docker.com/compose/install/)
 
-### Step 1: Clone the Repository or Copy the `docker-compose.yml` File
+## Step 1: Clone the Repository
 
-You can either clone the repository or manually download the `docker-compose.yml` file to your local system.
+You can either clone the repository or manually download the `docker-compose.yml` file to your local machine.
 
-#### Option 1: Clone the repository
-```
-git clone https://github.com/TropicSatern36/OMV_Compose.git
-cd OMV_Compose
-```
+1. Clone the repository with the following command or manually download the `docker-compose.yml` file:
+    ```bash
+    git clone https://github.com/TropicSatern36/OMV_Compose.git .
+    ```
 
-1. Clone the repository or copy the `docker-compose.yml` file to your system.
-2. Create a `.env` file and set the necessary environment variables such as:
-   - `TZ`: Timezone (e.g., `America/New_York`)
-   - `PUID` and `PGID`: User and group IDs for file permissions
-   - `EMBY_PORT`, `TORRENTING_PORT`, `HTTP_PORT`, `HTTPS_PORT`: Ports for services
-   - `TUNNEL_TOKEN`: Cloudflare Tunnel token
-   - `DOWNLOADS_PATH`, `MEDIA_PATH`, `USERS_PATH`: File paths for persistent data
-3. Run `docker-compose up -d` to start all the services in detached mode.
+2. **Edit the `.env` file** to configure your environment settings as needed.
 
+3. Run the following command to start all services in detached mode:
+    ```bash
+    docker-compose up -d
+    ```
+
+This will initialize the services defined in the `docker-compose.yml` file. The `-d` flag ensures that the containers run in the background.
+
+## Additional Notes
+- Make sure to adjust any volume mappings and environment variables in the `.env` file based on your specific requirements.
+- If you encounter issues, refer to the Docker logs using `docker-compose logs` for troubleshooting.
 ## Notes
 
 - The configuration is designed for use with a local network and uses static IP addresses within the `10.5.0.0/24` subnet.
