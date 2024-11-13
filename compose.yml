@@ -1,3 +1,18 @@
+################################################################################
+# Repository: OMV_Compose
+# Author: TropicSatern36
+# GitHub: https://github.com/TropicSatern36/OMV_Compose
+# Description: Docker Compose configuration for managing and automating media 
+#              services, including DNS filtering, media management, torrenting, 
+#              and reverse proxying.
+# Features:
+# - Media Management (Emby, Radarr, Sonarr, Kavita)
+# - Torrent Management (qBittorrent)
+# - Reverse Proxy (SWAG)
+# - DNS Filtering (AdGuard Home)
+# - Cloudflare Tunnel Integration
+################################################################################
+
 # Define custom networks for container communication
 networks:
   omv:
