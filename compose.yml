@@ -44,14 +44,11 @@ services:
       - ${APPDATA}/emby:/config
       - media:/media
       - users:/home
-      - /opt/vc/lib:/opt/vc/lib #optional
+      - /opt/vc/lib:/opt/vc/lib # Optional
     devices:
-      - /dev/dri:/dev/dri #optional
+      - /dev/dri:/dev/dri # Optional
     ports:
       - ${EMBY_PORT}:${EMBY_PORT}
-    #networks:
-    #  omv:
-    #    ipv4_address: 10.5.0.103
     network_mode: host
     restart: unless-stopped
 
@@ -185,11 +182,11 @@ services:
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
-    environment:    
-      - WATCHTOWER_RUN_ONCE=true  # Equivalent of --run-once
+    environment:
+      - WATCHTOWER_RUN_ONCE=true
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_NOTIFICATION_REPORT=true
-      - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_NOTIFIARR_KEY}  # Replace with your Notifiarr API key and endpoint
+      - WATCHTOWER_NOTIFICATION_URL=generic://notifiarr.com/api/v1/notification/watchtower/${WATCHTOWER_NOTIFIARR_KEY}?template=json
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
