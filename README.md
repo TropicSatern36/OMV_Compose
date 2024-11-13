@@ -1,8 +1,8 @@
 # Docker Compose Media Server and Automation Setup
 
-This Docker Compose configuration sets up a variety of containers for managing and automating various services related to media streaming, torrenting, and network management. The setup includes applications for DNS filtering, media management, downloading, reverse proxying, and system automation.
+This Docker Compose configuration sets up various containers for managing and automating various services related to media streaming, torrenting, and network management. The setup includes applications for DNS filtering, media management, downloading, reverse proxying, and system automation.
 
-The services are connected via a custom Docker network (`omv`), ensuring each container can communicate with others on a dedicated subnet. The containers are configured to persist important data like media libraries and configurations, as well as to expose relevant ports for accessing web interfaces.
+The services are connected via a custom Docker network (`omv`), ensuring each container can communicate with others on a dedicated subnet. The containers are configured to persist important data like media libraries and configurations and to expose relevant ports for accessing web interfaces.
 
 ## Features
 
@@ -11,9 +11,9 @@ The services are connected via a custom Docker network (`omv`), ensuring each co
 
 ### Media Management:
 - **Emby**: A media server to organize and stream movies and TV shows.
-- **Kavita**: A service for managing eBook libraries.
-- **Radarr**: Automatically downloads and organizes movies, and manages your movie library.
-- **Sonarr**: Automatically downloads and organizes TV shows, and manages your TV show library.
+- **Kavita**: A service for organizing and reading eBook libraries.
+- **Radarr**: Automatically downloads and organizes movies, and manages your Movie library.
+- **Sonarr**: Automatically downloads, organizes and manages your TV shows and Anime library.
 - **Prowlarr**: Indexer manager for NZB and torrent clients like Radarr and Sonarr.
 
 ### Torrent Management:
@@ -24,21 +24,21 @@ The services are connected via a custom Docker network (`omv`), ensuring each co
 - **SWAG (Secure Web Application Gateway)**: A reverse proxy service that handles SSL termination, DNS validation (via Cloudflare), and access to internal services via subdomains.
 
 ### Automation & Monitoring:
-- **Watchtower**: Automatically updates containers when new versions are available and sends notifications of updates.
+- **Watchtower**: Automatically updates containers when new versions are released and notifies you of the updates.
 
 ### Cloudflare Tunnel:
-- **Cloudflared**: A service to securely expose local services to the internet using Cloudflare's tunnel.
+- **Cloudflare**: A service to securely expose local services to the internet using Cloudflare's tunnel.
 
 ## Network Configuration
 
-The services communicate with each other via a custom bridge network (`omv`) with a dedicated subnet (`10.5.0.0/24`). This allows containers to access each other using static IP addresses within this subnet. The containerized applications are also able to communicate securely with external services.
+The services are connected through a custom bridge network (omv) with a dedicated subnet (10.5.0.0/24). This setup allows containers to communicate with each other using static IP addresses within the subnet, while also enabling secure communication with external services.
 
 ## Persistent Storage
 
 Each application that requires persistent data is configured with volumes to ensure that data is retained across container restarts. These volumes include:
 
 - **Media Volumes**: For storing media files such as movies, TV shows, and eBooks.
-- **Config Volumes**: For preserving application configuration and settings.
+- **Config Volumes**: For storing and preserving application configurations and settings.
 
 These volumes are bound to host directories, allowing for easy access and management of files.
 
@@ -46,7 +46,7 @@ These volumes are bound to host directories, allowing for easy access and manage
 
 Several ports are exposed for external access:
 
-- **AdGuard Home**: Exposes DNS port (53/udp).
+- **AdGuard Home**: Exposes DNS port (53/UDP).
 - **qBittorrent**: Exposes ports for web UI and torrenting traffic.
 - **SWAG**: Exposes HTTP/HTTPS ports for reverse proxy and SSL traffic.
 - **Emby, Radarr, Sonarr, Prowlarr**: Exposes web UI ports for accessing the respective applications.
@@ -56,7 +56,7 @@ Several ports are exposed for external access:
 | Service         | Description                                                                                      | Static IP Address |
 |-----------------|--------------------------------------------------------------------------------------------------|-------------------|
 | **AdGuard**     | DNS-based ad blocker and network-wide filtering, also allows for DNS rewrites for local services | 10.5.0.101        |
-| **Cloudflared** | Cloudflare tunnel service for secure access                                                     | 10.5.0.102        |
+| **Cloudflare** | Cloudflare tunnel service for secure access                                                     | 10.5.0.102        |
 | **Emby**        | Media server for organizing and streaming media                                                 | Host mode         |
 | **Organizr**    | Web interface for organizing media apps                                                         | 10.5.0.104        |
 | **Kavita**      | eBook management and library service                                                              | 10.5.0.105        |
