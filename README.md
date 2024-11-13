@@ -1,8 +1,8 @@
 # Docker Compose Media Server and Automation Setup
 
-This Docker Compose configuration sets up various containers for managing and automating various services related to media streaming, torrenting, and network management. The setup includes applications for DNS filtering, media management, downloading, reverse proxying, and system automation.
+This Docker Compose configuration sets up various containers for managing and automating services related to media streaming, torrenting, and network management. The setup includes applications for DNS filtering, media management, downloading, reverse proxying, and system automation.
 
-The services are connected via a custom Docker network (`omv`), ensuring each container can communicate with others on a dedicated subnet. The containers are configured to persist important data like media libraries and configurations and to expose relevant ports for accessing web interfaces.
+The services are connected via a custom Docker network (`omv`), ensuring each container can communicate with others on a dedicated subnet. The containers are configured to persist important data, such as media libraries and configurations, and to expose relevant ports for accessing web interfaces.
 
 ## Features
 
@@ -12,13 +12,13 @@ The services are connected via a custom Docker network (`omv`), ensuring each co
 ### Media Management:
 - **Emby**: A media server to organize and stream movies and TV shows.
 - **Kavita**: A service for organizing and reading eBook libraries.
-- **Radarr**: Automatically downloads and organizes movies, and manages your Movie library.
-- **Sonarr**: Automatically downloads, organizes and manages your TV shows and Anime library.
+- **Radarr**: Automatically downloads and organizes movies, and manages your movie library.
+- **Sonarr**: Automatically downloads, organizes, and manages your TV shows and anime library.
 - **Prowlarr**: Indexer manager for NZB and torrent clients like Radarr and Sonarr.
 
 ### Torrent Management:
 - **qBittorrent**: A torrent client for downloading media files with a web UI for management.
-- **Flaresolverr**: A service to bypass Cloudflare protection, allowing for seamless integration with various APIs.
+- **Flaresolverr**: A service to bypass Cloudflare protection, allowing seamless integration with various APIs.
 
 ### Reverse Proxy & SSL:
 - **SWAG (Secure Web Application Gateway)**: A reverse proxy service that handles SSL termination, DNS validation (via Cloudflare), and access to internal services via subdomains.
@@ -31,7 +31,7 @@ The services are connected via a custom Docker network (`omv`), ensuring each co
 
 ## Network Configuration
 
-The services are connected through a custom bridge network (omv) with a dedicated subnet (10.5.0.0/24). This setup allows containers to communicate with each other using static IP addresses within the subnet, while also enabling secure communication with external services.
+The services are connected through a custom bridge network (`omv`) with a dedicated subnet (`10.5.0.0/24`). This setup allows containers to communicate with each other using static IP addresses within the subnet, while also enabling secure communication with external services.
 
 ## Persistent Storage
 
@@ -40,7 +40,7 @@ Each application that requires persistent data is configured with volumes to ens
 - **Media Volumes**: For storing media files such as movies, TV shows, and eBooks.
 - **Config Volumes**: For storing and preserving application configurations and settings.
 
-These volumes are bound to host directories, allowing for easy access and management of files.
+These volumes are bound to host directories, allowing easy access and management of files.
 
 ## Ports
 
@@ -80,7 +80,7 @@ The configuration uses Docker volumes for persistent storage of media, downloads
 
 This guide provides step-by-step instructions for setting up and running a Docker Compose-based media server and automation configuration.
 
-## Prerequisites
+### Prerequisites
 
 Before proceeding, ensure the following software is installed on your system:
 
@@ -92,7 +92,7 @@ If Docker or Docker Compose is not installed, follow the official installation i
 - [Install Docker](https://docs.docker.com/get-docker/)
 - [Install Docker Compose](https://docs.docker.com/compose/install/)
 
-## Step 1: Clone the Repository
+### Step 1: Clone the Repository
 
 You can either clone the repository or manually download the `docker-compose.yml` file to your local machine.
 
@@ -110,9 +110,10 @@ You can either clone the repository or manually download the `docker-compose.yml
 
 This will initialize the services defined in the `docker-compose.yml` file. The `-d` flag ensures that the containers run in the background.
 
-## Additional Notes
+### Additional Notes
 - Make sure to adjust any volume mappings and environment variables in the `.env` file based on your specific requirements.
 - If you encounter issues, refer to the Docker logs using `docker-compose logs` for troubleshooting.
+
 ## Notes
 
 - The configuration is designed for use with a local network and uses static IP addresses within the `10.5.0.0/24` subnet.
