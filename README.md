@@ -97,10 +97,10 @@ If you do not have Docker and Docker Compose installed, you can follow the offic
 You can either clone the repository or manually download the `docker-compose.yml` file to your local system.
 
 #### Option 1: Clone the repository
-```bash
+```
 git clone https://github.com/TropicSatern36/OMV_Compose.git
 cd OMV_Compose
-
+```
 
 1. Clone the repository or copy the `docker-compose.yml` file to your system.
 2. Create a `.env` file and set the necessary environment variables such as:
