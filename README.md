@@ -78,6 +78,30 @@ The configuration uses Docker volumes for persistent storage of media, downloads
 
 ## How to Use
 
+This section provides step-by-step instructions for setting up and running the Docker Compose Media Server and Automation configuration.
+
+### Prerequisites
+
+Before starting, make sure you have the following installed:
+
+- **Docker**: Docker is required to run the containers.
+- **Docker Compose**: Docker Compose is used to manage multi-container Docker applications.
+- **Git** (optional): To clone the repository.
+
+If you do not have Docker and Docker Compose installed, you can follow the official installation guides:
+- [Install Docker](https://docs.docker.com/get-docker/)
+- [Install Docker Compose](https://docs.docker.com/compose/install/)
+
+### Step 1: Clone the Repository or Copy the `docker-compose.yml` File
+
+You can either clone the repository or manually download the `docker-compose.yml` file to your local system.
+
+#### Option 1: Clone the repository
+```bash
+git clone https://github.com/TropicSatern36/OMV_Compose.git
+cd OMV_Compose
+
+
 1. Clone the repository or copy the `docker-compose.yml` file to your system.
 2. Create a `.env` file and set the necessary environment variables such as:
    - `TZ`: Timezone (e.g., `America/New_York`)
