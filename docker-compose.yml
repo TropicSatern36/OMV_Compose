@@ -183,10 +183,10 @@ services:
       - PUID=${PUID}  # Set user ID for file permissions
       - PGID=${PGID}  # Set group ID for file permissions
       - TZ=${TZ}  # Set the timezone
-      - URL=tropicsatern36.com  # Domain name for reverse proxy
-      - SUBDOMAINS=wildcard  # Use wildcard for subdomains
-      - VALIDATION=dns  # DNS validation for SSL certificates
-      - DNSPLUGIN=cloudflare  # DNS plugin for Cloudflare validation
+      - URL=${URL}  # Domain name for reverse proxy
+      - SUBDOMAINS=${SUBDOMAINS}  # Use wildcard for subdomains
+      - VALIDATION=${VALIDATION}  # DNS validation for SSL certificates
+      - DNSPLUGIN=${DNSPLUGIN}  # DNS plugin for Cloudflare validation
     volumes:
       - ${APPDATA}/swag:/config  # Persist SWAG configuration
     ports:
