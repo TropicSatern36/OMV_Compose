@@ -216,7 +216,7 @@ services:
       - WATCHTOWER_RUN_ONCE=true  # Run Watchtower once and exit
       - WATCHTOWER_CLEANUP=true  # Remove old images after updating
       - WATCHTOWER_NOTIFICATION_REPORT=true  # Enable notification after update
-      - WATCHTOWER_NOTIFICATION_URL=https://notifiarr.com/api/v1/notification/watchtower/${WATCHTOWER_NOTIFIARR_KEY}?template=json  # Notification URL for updates
+      - WATCHTOWER_NOTIFICATION_URL=generic://notifiarr.com/api/v1/notification/watchtower/${WATCHTOWER_NOTIFIARR_KEY}?template=json  # Notification URL for updates
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock  # Bind the Docker socket to allow Watchtower to monitor containers
     networks:
