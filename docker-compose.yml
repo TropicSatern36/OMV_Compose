@@ -27,7 +27,7 @@ services:
   
   # AdGuard Home service for DNS filtering and ad-blocking
   adguard:
-    image: adguard/adguardhome:latest  # The Docker image for AdGuard Home
+    image: docker.io/adguard/adguardhome:latest  # The Docker image for AdGuard Home
     container_name: adguard           # The name of the container
     environment:
       - TZ=${TZ}  # Set the timezone using the TZ environment variable from the .env file
@@ -44,7 +44,7 @@ services:
   # Cloudflare Tunnel service for secure DNS tunneling
   cloudflared:
     container_name: cloudflared  # Name of the container
-    image: cloudflare/cloudflared:latest  # Cloudflare Tunnel image
+    image: docker.io/cloudflare/cloudflared:latest  # Cloudflare Tunnel image
     networks:
       omv:
         ipv4_address: 10.5.0.102  # Static IP address in the custom network
@@ -75,7 +75,7 @@ services:
 
   # Organizr service to manage and organize your media apps
   organizr:
-    image: organizr/organizr:latest  # Organizr Docker image
+    image: docker.io/organizr/organizr:latest  # Organizr Docker image
     container_name: organizr  # Container name
     environment:
       - PUID=${PUID}  # Set user ID for file permissions
@@ -210,7 +210,7 @@ services:
 
   # Watchtower service for automatic updates of Docker containers
   watchtower:
-    image: containrrr/watchtower  # Watchtower Docker image
+    image: docker.io/containrrr/watchtower  # Watchtower Docker image
     container_name: watchtower  # Container name
     environment:
       - WATCHTOWER_RUN_ONCE=true  # Run Watchtower once and exit
