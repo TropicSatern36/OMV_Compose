@@ -176,6 +176,7 @@ services:
   # SWAG (Secure Web Application Gateway) service for reverse proxy
   swag:
     image: lscr.io/linuxserver/swag:latest  # SWAG Docker image
+    #image: lscr.io/linuxserver/nginx:latest  # NGINX Docker image for internal use only
     container_name: swag  # Container name
     cap_add:
       - NET_ADMIN  # Add capabilities to manage network settings
