@@ -105,7 +105,7 @@ services:
 
   # Prowlarr service for indexer management in NZB and torrent clients
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:develop  # Prowlarr Docker image
+    image: lscr.io/linuxserver/prowlarr:latest  # Prowlarr Docker image
     container_name: prowlarr  # Container name
     environment:
       - PUID=${PUID}  # Set user ID for file permissions
@@ -141,7 +141,7 @@ services:
 
   # Radarr service for automatic movie downloading
   radarr:
-    image: lscr.io/linuxserver/radarr:develop  # Radarr Docker image
+    image: lscr.io/linuxserver/radarr:latest  # Radarr Docker image
     container_name: radarr  # Container name
     environment:
       - PUID=${PUID}  # Set user ID for file permissions
@@ -158,7 +158,7 @@ services:
 
   # Sonarr service for TV show downloading and management
   sonarr:
-    image: lscr.io/linuxserver/sonarr:develop  # Sonarr Docker image
+    image: lscr.io/linuxserver/sonarr:latest  # Sonarr Docker image
     container_name: sonarr  # Container name
     environment:
       - PUID=${PUID}  # Set user ID for file permissions
