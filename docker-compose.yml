@@ -6,9 +6,9 @@
 #              services, including DNS filtering, media management, torrenting, 
 #              and reverse proxying.
 # Features:
-# - Media Management (Emby, Radarr, Sonarr, Kavita)
+# - Media Management (Emby,Jellyfin, Radarr, Sonarr, Kavita)
 # - Torrent Management (qBittorrent)
-# - Reverse Proxy (SWAG)
+# - Reverse Proxy (SWAG,NGINX)
 # - DNS Filtering (AdGuard Home)
 # - Cloudflare Tunnel Integration
 ################################################################################
@@ -55,7 +55,8 @@ services:
 
   # Emby Media Server service
   emby:
-    image: lscr.io/linuxserver/emby:latest  # Emby Docker image from LinuxServer.io
+    #image: lscr.io/linuxserver/emby:latest  # Emby Docker image from LinuxServer.io
+    image: lscr.io/linuxserver/jellyfin:latest # Jellyfin Docker image from LinuxServer.io for free solution
     container_name: emby  # Container name
     environment:
       - PUID=${PUID}  # Set user ID for file permissions
@@ -68,8 +69,8 @@ services:
       - /opt/vc/lib:/opt/vc/lib  # Optional: for hardware acceleration
     devices:
       - /dev/dri:/dev/dri  # Optional: for hardware acceleration (GPU passthrough)
-    ports:
-      - ${EMBY_PORT}:${EMBY_PORT}  # Expose Emby port
+    #ports:
+    #  - ${EMBY_PORT}:${EMBY_PORT}  # Expose Emby port
     network_mode: host  # Use host networking mode (can be changed to bridge)
     restart: unless-stopped  # Restart the container unless explicitly stopped
 
